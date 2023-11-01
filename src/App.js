@@ -11,6 +11,12 @@ export default function App() {
     }
   };
 
+  const handleCompletedTask = (index) => {
+    const newTasks = [...taskList];
+    newTasks[index].checked = !newTasks[index].checked;
+    setTaskList(newTasks);
+  };
+
   return (
     <>
       <input
@@ -20,8 +26,16 @@ export default function App() {
         onKeyDown={handleEnter}
       />
       {taskList.map((task, index) => (
-        <div key={index}>
-          {task.isChecked} - {task.name}
+        <div
+          style={{ textDecoration: task.isChecked ? "Line-through" : "none" }}
+          key={index}
+        >
+          {task.name}
+          <input
+            type="checkbox"
+            checked={task.isChecked}
+            onChange={() => handleCompletedTask(index)}
+          />
         </div>
       ))}
     </>
