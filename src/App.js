@@ -13,10 +13,14 @@ export default function App() {
 
   const handleCompletedTask = (index) => {
     const newTasks = [...taskList];
-    newTasks[index].checked = !newTasks[index].checked;
+    newTasks[index].isChecked = !newTasks[index].isChecked;
     setTaskList(newTasks);
   };
 
+  const handleDelete = (targetIndex) => {
+    const newTasks = taskList.filter((task, index) => index !== targetIndex);
+    setTaskList(newTasks);
+  };
   return (
     <>
       <input
@@ -36,6 +40,7 @@ export default function App() {
             checked={task.isChecked}
             onChange={() => handleCompletedTask(index)}
           />
+          <button onClick={() => handleDelete(index)}>Delete</button>
         </div>
       ))}
     </>
